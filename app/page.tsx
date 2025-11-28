@@ -9,7 +9,7 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <a
-            href="/login/github"
+            href="/api/login/github"
             className="inline-flex items-center gap-2 rounded-md bg-black text-white px-5 py-3 hover:opacity-90"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">

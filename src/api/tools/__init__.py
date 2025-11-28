@@ -1,1 +1,1 @@
-import src.tools.supabase_client
+import api.tools.supabase_client

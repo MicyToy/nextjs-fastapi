@@ -4,7 +4,7 @@ import jwt
 from fastapi import Request
 from supabase_auth import AuthResponse
 
-from src.tools.supabase_client import supabase
+from api.tools.supabase_client import supabase
 
 JWT_SECRET = os.getenv("JWT_SECRET")
 

@@ -4,7 +4,7 @@ from starlette.responses import HTMLResponse, RedirectResponse
 
 from api.tools.supabase_client import supabase
 from api.app.auth import get_current_user
-router = APIRouter(prefix="", tags=["todos"])
+router = APIRouter(prefix="/api", tags=["todos"])
 
 # todos listing
 # @router.get("/todo", response_class=HTMLResponse)
@@ -36,7 +36,7 @@ def add_todo(request: Request, title: str = Form(...), description: str = Form("
                                     "user_id": user,
                                     "due_date": due_date, "priority": priority,
                                     "tags": tags}).execute()
-    return RedirectResponse("/todo", status_code=302)
+    return RedirectResponse("/todos", status_code=302)
 
 # todos page
 # @router.get("/todo/edit/{todo_id}")
@@ -53,13 +53,13 @@ def edit_todo(todo_id: int, request: Request, title: str = Form(...), descriptio
     supabase.table("todos").update({"title": title, "description": description,
                                     "due_date": due_date, "priority": priority,
                                     "tags": tags}).eq("id", todo_id).execute()
-    return RedirectResponse("/todo", status_code=302)
+    return RedirectResponse("/todos", status_code=302)
 
 # 完成
 @router.get("/todo/complete/{todo_id}")
 def complete(todo_id: int, request: Request):
     supabase.table("todos").update({"status": "done"}).eq("id", todo_id).execute()
-    return RedirectResponse("/todo", status_code=302)
+    return RedirectResponse("/todos", status_code=302)
 
 # @router.get("/category/add")
 # def add_category_page(request: Request):
@@ -69,4 +69,10 @@ def complete(todo_id: int, request: Request):
 def add_category(request: Request, name: str = Form(...)):
     user = get_current_user(request)
     supabase.table("categories").insert({"name": name, "user_id": user}).execute()
-    return RedirectResponse("/", status_code=302)
+    return RedirectResponse("/categories", status_code=302)
+
+# 编辑分类 API
+@router.post("/category/edit/{category_id}")
+def edit_category(category_id: int, request: Request, name: str = Form(...)):
+    supabase.table("categories").update({"name": name}).eq("id", category_id).execute()
+    return RedirectResponse("/categories", status_code=302)
