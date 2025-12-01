@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from starlette.responses import RedirectResponse
 
 from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv('.env.local'), override=False)
+load_dotenv(find_dotenv('.env'), override=False)
 
 from api.tools.supabase_client import supabase
 from api.app.todo import router
