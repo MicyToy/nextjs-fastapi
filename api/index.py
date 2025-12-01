@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from starlette.responses import RedirectResponse
 
 from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv('.env'), override=False)
+load_dotenv(find_dotenv('.env'), override=True)
 
 from api.tools.supabase_client import supabase
 from api.app.todo import router
@@ -22,8 +22,8 @@ def hello_world():
 @app.get("/api/login/github")
 def login_github():
     # Ensure redirect_to points back to our FastAPI callback under /api
-    callback = f"{REDIRECT_URL.rstrip('/')}/todos"
-    url = f"{supabase.supabase_url}/auth/v1/authorize?provider=github&redirect_to={callback}"
+    redirect_to = f"https://{REDIRECT_URL.rstrip('/')}/todos"
+    url = f"{supabase.supabase_url}/auth/v1/authorize?provider=github&redirect_to={redirect_to}"
     return RedirectResponse(url, 302)
 
 @app.get("/api/auth/callback")
