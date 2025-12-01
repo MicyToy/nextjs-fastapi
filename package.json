@@ -5,7 +5,7 @@
   "scripts": {
     "flask-dev": "python3 -m uvicorn api.index:app --port 5328 --reload",
     "next-dev": "next dev",
-    "dev": "pnpm run flask-dev && pnpm run next-dev",
+    "dev": "concurrently \"pnpm run flask-dev\" \"pnpm run next-dev\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
