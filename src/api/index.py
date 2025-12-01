@@ -9,7 +9,7 @@ load_dotenv(find_dotenv('.env.local'), override=False)
 from api.tools.supabase_client import supabase
 from api.app.todo import router
 
-REDIRECT_URL = os.getenv("REDIRECT_URL")
+REDIRECT_URL = os.getenv("VERCEL_URL")
 
 app = FastAPI()
 app.include_router(router)
