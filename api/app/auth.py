@@ -6,7 +6,7 @@ from supabase_auth import AuthResponse
 
 from api.tools.supabase_client import supabase
 
-JWT_SECRET = os.getenv("JWT_SECRET")
+JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET")
 
 def get_current_user(request: Request):
 

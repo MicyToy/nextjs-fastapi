@@ -41,6 +41,15 @@ export default async function EditTodoPage({ params }: Props) {
           <textarea name="description" rows={4} defaultValue={todo.description ?? ''} className="w-full rounded border px-3 py-2" />
         </div>
 
+          <div className="space-y-2">
+            <label className="block text-sm font-medium">标签</label>
+              <select name={"tags"} multiple={true} className="w-full rounded border px-3 py-2">
+                  <option value={"prod"} selected={todo.tags?.includes("prod")}>prod</option>
+                  <option value={"stage"} selected={todo.tags?.includes("stage")}>stage</option>
+                  <option value={"dev"} selected={todo.tags?.includes("dev")}>dev</option>
+              </select>
+          </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="block text-sm font-medium">截止日期</label>

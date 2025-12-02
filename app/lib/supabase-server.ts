@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 
 const SUPABASE_URL = process.env.SUPABASE_URL as string
-const SUPABASE_KEY = process.env.SUPABASE_KEY as string
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY as string
 
 export function getAuthHeaders() {
   const cookieStore = cookies()

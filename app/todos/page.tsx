@@ -47,6 +47,9 @@ export default async function TodosPage() {
                 {t.due_date && <span>截止：{t.due_date}</span>}
                 {typeof t.priority === 'number' && <span>优先级：{t.priority}</span>}
               </div>
+              <div className="mt-1 text-xs text-gray-500 flex gap-3">
+                {t.tags && <span>标签：{t.tags.join(', ')}</span>}
+              </div>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {t.status !== 'done' && (

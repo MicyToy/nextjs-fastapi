@@ -1,0 +1,1 @@
+alter table "public"."todos" add column "tags" character varying[];

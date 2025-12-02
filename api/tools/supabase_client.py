@@ -4,7 +4,8 @@ from supabase.client import ClientOptions
 
 def init_supabase() -> Client:
     _url: str = os.environ.get("SUPABASE_URL")
-    _key: str = os.environ.get("SUPABASE_KEY")
+    # 兼容两种key设置方式
+    _key: str = os.environ.get("SUPABASE_KEY") if None else os.environ.get('SUPABASE_SERVICE_ROLE_KEY')
     supabase_client: Client = create_client(
         _url,
         _key,

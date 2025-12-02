@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Script from "next/script";
 
 export default function Home() {
   return (
@@ -24,6 +25,30 @@ export default function Home() {
           </div>
         </div>
       </div>
+        <Script strategy={"lazyOnload"} id={"getAccessTokenScript"}>
+            {
+                `function getAccessToken() {
+                    const hash = window.location.hash.substring(1);  // 去掉 #
+                    console.log(hash);
+                    const params = new URLSearchParams(hash);
+                    console.log(params);
+        
+                    const access_token = params.get("access_token");
+                    const expires_in = params.get("expires_in");
+                    const refresh_token = params.get("refresh_token");
+                    console.log(access_token, expires_in, refresh_token);
+        
+                    if (access_token) {
+                        fetch("/api/auth/callback?access_token="+ access_token+"&refresh_token="+refresh_token+"&expires_in=" + expires_in)
+                        .then(res => res.json())
+                    }
+                    else {
+                        console.error("未获取到 access_token")
+                    }
+                }
+
+                getAccessToken()`}
+        </Script>
     </main>
   )
 }
